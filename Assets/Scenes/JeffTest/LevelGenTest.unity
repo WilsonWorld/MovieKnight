@@ -236,6 +236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11a1cc8e6fc5f14cab88460b5d05a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Themes:
+  - {fileID: 11400000, guid: 3a26140c75666704ab12e247f450e27e, type: 2}
+  - {fileID: 11400000, guid: b5a37a4cfd8ada549ac9a6c376a11f0a, type: 2}
+  ThemeIndex: -1
   Seed: 24
   RoomAmount: 100
   Size: {x: 30, y: 30}

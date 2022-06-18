@@ -13,6 +13,9 @@ public class LevelGenerator : MonoBehaviour
         Hallway
     }
 
+    public LevelTheme[] Themes;
+    public int ThemeIndex;
+
     public int Seed;
     public int RoomAmount;
 
@@ -32,6 +35,10 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
+        if(ThemeIndex == -1)
+        {
+            ThemeIndex = UnityEngine.Random.Range(0, Themes.Length);
+        }
         Generate();
     }
 
@@ -196,20 +203,23 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    void PlaceCube(Vector2Int location, Vector2Int size, Material material)
+    void PlaceCube(Vector2Int location, Vector2Int size, bool room)
     {
         GameObject go = Instantiate(CubePrefab, new Vector3(location.x, 0, location.y), Quaternion.identity);
         go.GetComponent<Transform>().localScale = new Vector3(size.x, 1, size.y);
-        go.GetComponent<MeshRenderer>().material = material;
+        if(room)
+            go.GetComponent<MeshRenderer>().material = Themes[ThemeIndex].FloorMaterial;
+        else
+            go.GetComponent<MeshRenderer>().material = Themes[ThemeIndex].HallwayMaterial;
     }
 
     void PlaceRoom(Vector2Int location, Vector2Int size)
     {
-        PlaceCube(location, size, OrangeMat);
+        PlaceCube(location, size, true);
     }
 
     void PlaceHallway(Vector2Int location)
     {
-        PlaceCube(location, new Vector2Int(1, 1), BlueMat);
+        PlaceCube(location, new Vector2Int(1, 1), false);
     }
 }
