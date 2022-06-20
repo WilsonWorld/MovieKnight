@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   HallwayMaterial: {fileID: 8780918088588942942, guid: c37f67961a49e6b4488861a250c21ed2, type: 2}
-  LevelAssets: []
+  LevelAssets:
+  - {fileID: 5447031042789531260, guid: 14a6003bb58707640a1d3572e6a242cc, type: 3}
+  - {fileID: 2880861688535059218, guid: 4c2e08a8cd250e642b10d8421e67da3c, type: 3}

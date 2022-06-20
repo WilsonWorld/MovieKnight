@@ -32,10 +32,21 @@ public class LevelGenerator : MonoBehaviour
     Grid2D<CellType> Grid;
     Delaunay2D Delaunay;
     HashSet<Prim.Edge> SelectedEdges;
+    bool[,] m_AssetPositions;
 
     void Start()
     {
-        if(ThemeIndex == -1)
+        m_AssetPositions = new bool[100, 100];
+
+        for (int x = 0; x < 100; x++)
+        {
+            for (int y = 0; y < 100; y++)
+            {
+                m_AssetPositions[x, y] = true;
+            }
+        }
+
+        if (ThemeIndex == -1)
         {
             ThemeIndex = UnityEngine.Random.Range(0, Themes.Length);
         }
@@ -90,7 +101,7 @@ public class LevelGenerator : MonoBehaviour
             if (add)
             {
                 Rooms.Add(newRoom);
-                PlaceRoom(newRoom.Bounds.position, newRoom.Bounds.size);
+                PlaceRoom(newRoom.Bounds.position, newRoom.Bounds.size, newRoom);
 
                 foreach (var pos in newRoom.Bounds.allPositionsWithin)
                 {
@@ -213,13 +224,43 @@ public class LevelGenerator : MonoBehaviour
             go.GetComponent<MeshRenderer>().material = Themes[ThemeIndex].HallwayMaterial;
     }
 
-    void PlaceRoom(Vector2Int location, Vector2Int size)
+    void PlaceRoom(Vector2Int location, Vector2Int size, Room room)
     {
         PlaceCube(location, size, true);
+        PlaceRoomAssets(room);
     }
 
     void PlaceHallway(Vector2Int location)
     {
         PlaceCube(location, new Vector2Int(1, 1), false);
     }
+
+    void PlaceRoomAssets(Room room)
+    {
+        int roomSize = room.Bounds.size.x;
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3Int assetPosition = Vector3Int.zero;
+
+            assetPosition.x = UnityEngine.Random.Range(room.Bounds.xMin, room.Bounds.xMax);
+            assetPosition.y = 1;
+            assetPosition.z = UnityEngine.Random.Range(room.Bounds.yMin, room.Bounds.yMax);
+
+            while (!room.IsInRoom(assetPosition))
+            {
+                assetPosition.x = UnityEngine.Random.Range(room.Bounds.xMin, room.Bounds.xMax);
+                assetPosition.y = 1;
+                assetPosition.z = UnityEngine.Random.Range(room.Bounds.yMin, room.Bounds.yMax);
+            }
+
+            if(m_AssetPositions[assetPosition.x, assetPosition.z])
+            {
+                Instantiate(Themes[ThemeIndex].LevelAssets[UnityEngine.Random.Range(0, Themes[ThemeIndex].LevelAssets.Length)], assetPosition, Quaternion.identity);
+            }
+
+            m_AssetPositions[assetPosition.x, assetPosition.z] = false;
+        }
+    }
+
+    
 }

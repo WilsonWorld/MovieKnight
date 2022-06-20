@@ -243,7 +243,7 @@ MonoBehaviour:
   Seed: 24
   RoomAmount: 100
   Size: {x: 30, y: 30}
-  RoomMaxSize: {x: 6, y: 6}
+  RoomMaxSize: {x: 8, y: 8}
   CubePrefab: {fileID: 7415050535990569633, guid: af96f85c1bec7984fa70d75a3eecf5d7, type: 3}
   OrangeMat: {fileID: 2100000, guid: cf7d614f7304cae49a53207b9bd55b33, type: 2}
   BlueMat: {fileID: 2100000, guid: aac1dd6662565aa4b85382d01207dc6c, type: 2}
