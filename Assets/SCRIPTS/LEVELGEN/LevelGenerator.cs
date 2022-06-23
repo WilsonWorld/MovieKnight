@@ -20,6 +20,7 @@ public class LevelGenerator : MonoBehaviour
     public int RoomAmount;
 
     public Vector2Int Size;
+    public Vector2Int RoomMinSize;
     public Vector2Int RoomMaxSize;
 
     public GameObject CubePrefab;
@@ -75,8 +76,8 @@ public class LevelGenerator : MonoBehaviour
             );
 
             Vector2Int roomSize = new Vector2Int(
-                RandomNum.Next(1, RoomMaxSize.x + 1),
-                RandomNum.Next(1, RoomMaxSize.y + 1)
+                RandomNum.Next(RoomMinSize.x, RoomMaxSize.x + 1),
+                RandomNum.Next(RoomMinSize.y, RoomMaxSize.y + 1)
             );
 
             bool add = true;

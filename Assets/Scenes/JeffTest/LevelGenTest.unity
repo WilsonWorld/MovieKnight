@@ -242,7 +242,8 @@ MonoBehaviour:
   ThemeIndex: -1
   Seed: 24
   RoomAmount: 100
-  Size: {x: 30, y: 30}
+  Size: {x: 60, y: 60}
+  RoomMinSize: {x: 4, y: 4}
   RoomMaxSize: {x: 8, y: 8}
   CubePrefab: {fileID: 7415050535990569633, guid: af96f85c1bec7984fa70d75a3eecf5d7, type: 3}
   OrangeMat: {fileID: 2100000, guid: cf7d614f7304cae49a53207b9bd55b33, type: 2}
